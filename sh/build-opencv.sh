@@ -8,18 +8,22 @@ sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security m
 sudo apt update
 sudo apt-get install python-dev python-numpy libjasper1 libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 
+#cd ~/workspace/opencv-4.1.0
+#mkdir build
+#cd ~/workspace/opencv-4.1.0/build
+#cmake -DCMAKE_BUILD_TYPE=Release \
+#      -DCMAKE_INSTALL_PREFIX=/usr/local \
+#      -DBUILD_opencv_python2=OFF \
+#      -DBUILD_opencv_python3=ON \
+#      -DWITH_TBB=ON \
+#      -DWITH_GTK=ON \
+#      -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.1.0/modules \
+#      -DOPENCV_GENERATE_PKGCONFIG=YES \
+#      ../
 cd ~/workspace/opencv-4.1.0
 mkdir build
-cd ~/workspace/opencv-4.1.0/build
-cmake -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_INSTALL_PREFIX=/usr/local \
-      -DBUILD_opencv_python2=OFF \
-      -DBUILD_opencv_python3=ON \
-      -DWITH_TBB=ON \
-      -DWITH_GTK=ON \
-      -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.1.0/modules \
-      -DOPENCV_GENERATE_PKGCONFIG=YES \
-      ../
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
 
 NUM_CPU=$(nproc)
 make -j$(($NUM_CPU - 1))
